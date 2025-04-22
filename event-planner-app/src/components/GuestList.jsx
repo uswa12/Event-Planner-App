@@ -1,4 +1,3 @@
-// src/components/GuestList.jsx
 import React from 'react';
 
 const GuestList = ({ guests, onConfirm }) => {
@@ -9,16 +8,36 @@ const GuestList = ({ guests, onConfirm }) => {
       {guests.length === 0 ? (
         <p>No guests added yet.</p>
       ) : (
-        <ul>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
           {guests.map((guest) => (
             <li
               key={guest.id}
-              className={guest.confirmed ? 'confirmed' : ''}
+              className={guest.confirmed ? 'confirmed' : 'unconfirmed'}
+              style={{
+                backgroundColor: guest.confirmed ? '#e6ffed' : '#fff',
+                padding: '12px',
+                marginBottom: '10px',
+                borderRadius: '8px',
+                border: '1px solid #ccc',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
             >
               <div>
                 <strong>{guest.name}</strong> ({guest.email})
               </div>
-              <button onClick={() => onConfirm(guest.id)}>
+              <button
+                onClick={() => onConfirm(guest.id)}
+                style={{
+                  padding: '6px 12px',
+                  backgroundColor: guest.confirmed ? '#dc3545' : '#198754',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer'
+                }}
+              >
                 {guest.confirmed ? 'Unconfirm' : 'Confirm'}
               </button>
             </li>
